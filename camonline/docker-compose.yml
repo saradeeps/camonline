@@ -1,0 +1,14 @@
+authserver:
+    image: springio/authserver
+    ports:
+        - "8080:8080"
+
+cam-online:
+    image: springio/cam-online
+    ports:
+        - "9999:9999"
+    links:
+    - "authserver:auth"  
+    environment:
+        OAUTH2_SERVER_IP_PORT: 192.168.99.100:8080
+        SPRING_PROFILES_ACTIVE: docker

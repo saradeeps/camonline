@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>nz.govt.moh</groupId>
+	<artifactId>OnlineForms</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>OnlineForms</name>
+	<description></description>
+	
+	<!-- Convention: MODULES do not have the word "web" in them. COMPONENTS have the word "web" in them -->
+	<!-- ... note, using UML terminology -->
+	<modules>
+		<!-- UTILITIES i.e. general purpose library jars  -->
+		
+	
+		<!-- MODULES i.e. api library jars ... -->
+		
+
+		<!-- runtimes COMPONENTS i.e. spring boot apps ... -->
+		<module>authserver-master</module>
+		<module>CAMOnlineSolution</module>
+		
+		
+	</modules>
+	
+</project>
+

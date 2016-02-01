@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CAM Online</title>
+        <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>  
+         <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css"/>   
+         <link rel="stylesheet" href="../css/camList.css" type="text/css"/>   
+    </head>
+ 
+    <body>  
+       
+<nav class="navbar navbar-inverse navbar-fixed-top" id="headerlogin">
+        <div class="col-xs-12" data-bind="template:{name:'header'}"></div>
+    </nav>
+   
+     <div class="container-fluid" id="acontainer">       	   
+        <div class="col-xs-12 set-template" data-bind="template:{name:'premise'}"></div>
+    </div>
+    <div data-bind="template:{name:'updateCAMTemplate'}"></div>
+
+<script type="text/html" id="header">
+<div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Medicines Control Online Forms Application</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+                      
+            <li data-bind="{if: authenticated}"><a href='' data-bind="click:logout">Logout</a></li>
+            <li data-bind="{ifnot: authenticated}"><a href="/login">Login</a></li>
+            
+          </ul>
+          
+        </div>
+      </div>
+</script>
+
+
+
+<script type="text/html" id="premise">
+<div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">						
+                    <a><b>Respond to Corrective Actions</b></a>
+                </h4>
+            </div>
+        <div class="panel-body">
+		<select class="selectpicker" data-bind="options: leList, optionsCaption:'Select LE', value:selectedLE"></select>
+		<select class="selectpicker" data-bind="options: premiseList, optionsCaption:'Select Premise', value:selectedPremise,enable: premiseList().length"></select>
+		<select class="selectpicker" data-bind="options: auditTypeList, optionsCaption:'Select Audit Type', value:selectedAuditType"></select>
+		<select class="selectpicker" data-bind="options: auditSubTypeList, optionsCaption:'Select Audit SubType', value:selectedAuditSubType"></select>
+		<select class="selectpicker" data-bind="options: auditDateList, optionsCaption:'Select Audit Date', value:selectedAuditDate"></select>
+		<select class="selectpicker" data-bind="options: auditCriterionList, optionsCaption:'Select Audit Crirterion', value:selectedAuditCriterion"></select>
+		<select class="selectpicker" data-bind="options: attainmentRiskList, optionsCaption:'Select Attainment Risk', value:selectedAttainmentRisk"></select>
+
+		<table class="table table-bordered" id="CamListTable">
+            <thead>
+                <tr>
+                    <th data-bind="sort: { arr: entityList, prop: 'leName' }">Legal Entity Name</th>
+                    <th data-bind="sort: { arr: entityList, prop: 'premiseName' }">Premise Name(s)</th>
+                    <th>Audit Type</th>
+					<th>Audit SubType</th>
+					<th>Audit Date</th>
+					<th>Audit Criterion</th>
+					<th>Attainment Risk</th> 					 					                              
+                </tr>
+            </thead>
+            <tbody data-bind="{foreach:entityList}">
+                <tr>
+                    <td><a href="#" data-bind="click: $parent.getCamDetails"><span data-bind="{text:leName}"></span></a></td>
+                    <td data-bind="{text:premiseName}"></td>
+                    <td data-bind="{text:auditType}"></td>
+ 					<td data-bind="{text:auditSubType}"></td>
+ 					<td data-bind="{text:auditDate}"></td>
+ 					<td data-bind="{text:auditCriterion}"></td>
+ 					<td data-bind="{text:attainmentRisk}"></td>										                      
+             </tr>
+         </tbody>
+     </table> 
+</div>
+</div>
+</div>
+
+<div id="updateCAM" class="modal fade" role="dialog">
+  <div class="modal-dialog">    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update CAM</h4>
+      </div>
+      <div class="modal-body">
+
+    <div id="content">
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li class="active"><a href="#camDetails" data-toggle="tab">Record CAM</a></li>
+            <li><a href="#camHistory" data-toggle="tab">History</a></li>           
+        </ul>
+        <div id="my-tab-content" class="tab-content">
+            <div class="tab-pane active" id="camDetails">
+                <table class="table table-bordered" data-bind="{with:camDetailsSelected}">					
+					<tr>
+						<td>Case ID</td>
+						<td><span data-bind="{text:caseId}"></span></td>
+					</tr>
+					<tr>
+						<td>Audit Date</td>
+						<td><span data-bind="{text:auditDate}"></span></td>
+					</tr>
+					<tr>
+						<td>Date Response required</td>
+						<td><span data-bind="{text:camDate}"></span></td>
+					</tr>
+				    <tr>
+						<td>References</td>
+						<td><span data-bind="{text:references}"></span></td>
+					</tr>
+					<tr>
+						<td>Finding</td>
+						<td><span data-bind="{text:finding}"></span></td>
+					</tr>
+					<tr>
+						<td>Guidance</td>
+						<td><span data-bind="{text:guidance}"></span></td>
+					</tr>
+					<tr>
+						<td>Criterion Number</td>
+						<td><span data-bind="{text:auditCriterion}"></span></td>
+					</tr>
+					<tr>
+						<td>Response Date</td>
+						<td><span data-bind="{text:responseDate}"></span></td>
+					</tr>
+					<tr>
+						<td>Attainment Risk</td>
+						<td><span data-bind="{text:attainmentRisk}"></span></td>
+					</tr>					
+				</table>
+				<div class="camResponse"> 				
+					<b>Corrective Action Required</b>
+					<textarea rows="4" cols="50">  
+					</textarea> 					
+				</div>
+				<div class="camResponse">
+					<b>Upload files :</b>
+					<button type="button" class="btn">Upload Files</button>
+				</div>
+            </div>
+            <div class="tab-pane" id="camHistory">              
+<table class="table table-bordered" id="CamListTable">
+            <thead>
+                <tr>
+                    <th>Corrective Action Required</th>
+                    <th>Corrective Action Response</th>
+                    <th>Date Response Submitted</th>
+				</tr>
+			</thead>
+</table>	
+            </div>      
+		  
+        </div>
+    </div>
+<div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+        <button type="button" class="btn btn-primary">Update</button>
+    </div>
+    
+	</div>
+    </div>
+     
+    </div>
+
+  </div>
+</div>	
+</script> 
+
+
+<script type="text/html" id="updateCAMTemplate">
+
+</script>
+         
+        <script src="../js/libs/require.min.js"></script>
+		<script type="text/javascript"> 
+    		require(['../js/main'], function (common) {      
+      			require(['camList']);
+  			});
+		</script> 
+
+       
+        
+
+    </body>
+</html>
